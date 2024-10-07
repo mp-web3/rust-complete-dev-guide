@@ -21,6 +21,20 @@
 
 ## Useful
 
+### Installing external Crates
+
+```
+cargo add <crate-name>
+```
+
+e.g. to install the [rand package](https://crates.io/crates/rand) which has functionalities to generate random numbers.
+
+```
+cargo add rand
+```
+
+[See rand docs](https://docs.rs/rand/0.8.5/rand/)
+
 ### Formatter
 
 #### {:#}
