@@ -112,3 +112,17 @@ Here is your deck Deck {
 ```
 
 ## bank
+
+### bank overview
+
+We want to create a project that simulates a bank
+
+Each account will have 3 fields:
+
+- id (unsigned integer)
+- balance (integer)
+- holder (String)
+
+We will have a struct type representing a bank and another struct type representing an account.
+
+The bank will have tied n number of accounts.
