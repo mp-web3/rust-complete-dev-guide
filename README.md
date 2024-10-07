@@ -1,5 +1,9 @@
 # rust-complete-dev-guide
 
+## Important Links
+
+- Full [video explanation](https://www.udemy.com/course/rust-the-complete-developers-guide/learn/lecture/44784613) with examples of Ownership and Moves
+
 ## Projects
 
 1. deck
@@ -110,6 +114,25 @@ Here is your deck Deck {
     ],
 }
 ```
+
+## 10 Rules of Ownership, Borrowing and Lifetimes
+
+1. Every value is owned by a single variable, struct, vector, argument, etc. at a time
+2. Reassigning the value to another variable, passing it to a function, putting it into a vector, etc. _moves_ the value. The old variable can't be used anymore!
+3. You can create many read-only references to a value that exist at the same time
+4. You can't move a value while a ref to the value exists
+5. You can make a writeable (mutable) reference to a value only if there are no read-only references currently in use. One mutable ref to a value can exist at a time
+6. You can't mutate a value through the owner when any ref (mutable or immutable) to the value exists
+7. Some types of values are copied instead of moved (numbers, bools, chars, arrays/tuples with copyable elements)
+8. When a variable goes out of scope, the value owned by it is dropped (cleaned up in memory)
+9. Values can't be dropped if there are still active references to it
+10. References to a value can't outlive the value they refer to
+
+## Ownership
+
+## Borrowing
+
+## Lifetimes
 
 ## bank
 
