@@ -13,7 +13,11 @@
 - Associated Function: is a function tied to a struct definition
   - To call an associated function e.g. `impl-name::fun-name`
   - Use when you have a functionality not tied to a specific intance
-- Method: a function associated with a particular type
+  - E.g. you want to make a brand new copy of a deck that have different initialization points
+- Method: a function that operates on a specific instance of a type "struct" or "enum"
+  - The argument must be `&self`
+  - Use when you want to read or change fields on a specific instance
+- Implicit return: rust is going to return the last executed expression inside the function, as long as it doesn't end eith a semicolomn (;)
 
 ## Useful
 
