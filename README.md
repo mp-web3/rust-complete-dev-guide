@@ -4,11 +4,16 @@
 
 ## Definitions
 
+> ⚠️ In Rust "variables" are called "bindings"
+
 - Vector: can grow and shrink in size and contains elements
 - Array: it is a collection of elements fixed in size
 - Trait: a set of functions
-
-> ⚠️ In Rust "variables" are called "bindings"
+  > In other languages _Associated function_ is commonly referred to as _class_
+- Associated Function: is a function tied to a struct definition
+  - To call an associated function e.g. `impl-name::fun-name`
+  - Use when you have a functionality not tied to a specific intance
+- Method: a function associated with a particular type
 
 ## Useful
 
