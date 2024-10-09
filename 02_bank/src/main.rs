@@ -29,15 +29,14 @@ impl Bank {
 fn print_account(account: &Account) {
     println!("{:#?}", account);
 }
-// Takes in as an argument a mutable reference of type Account
-fn change_account(account: &mut Account) {
-    account.balance = 10;
+
+fn make_and_print_account() -> &Account {
+    let account = Account::new(1, String::from("me"));
+    println!("{:#?}", account);
+
+    &account
 }
 fn main() {
+    make_and_print_account();
 
-    let mut account = Account::new(1, String::from("me"));
-
-    change_account(&mut account);
-
-    println!("{:#?}", account);
 }

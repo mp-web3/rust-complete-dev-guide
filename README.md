@@ -224,7 +224,7 @@ fn main() {
 }
 ```
 
-## Copiable values
+### Copiable values
 
 7. Some types of values are copied instead of moved (numbers, bools, chars, arrays/tuples with copyable elements)
 
@@ -246,6 +246,13 @@ fn main() {
 ```
 
 ## Lifetimes
+
+The word "Lifetimes" by itself, refers to how long an owner or reference to a value exists
+"Generic Lifetimes"/"Lifetimes Annotations" is Extra syntax added in to clarify reletionships between different lifetimes
+
+8. When a variable goes out of scope, the value owned by it is dropped (cleaned up in memory)
+9. Values can't be dropped if there are still active references to it
+10. References to a value can't outlive the value they refer to
 
 ## bank
 
