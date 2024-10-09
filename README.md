@@ -256,7 +256,32 @@ The word "Lifetimes" by itself, refers to how long an owner or reference to a va
 
 ## bank
 
-### implementation
+## Implementation
+
+> With every function we write, we need to think about whether we are receiving values or refs
+> With every data structure we define, we need to think about whether we are storing values or refs
+
+### Bank Methods
+
+<!-- prettier-ignore-start -->
+
+| Description                                            | Method or Assoc. Func? | Name     | Args                  | Returns |
+|--------------------------------------------------------|-----------------------|----------|----------------------|---------|
+| Create a 'Bank' instance                                | Assoc. Func           | new()    | -                    | Bank    |
+| Add an account to the list of accounts                  | Method                | add_account | account: Account    |         |
+| Calculate the total balance of all accounts             | Method                | total_balance | -                  | f64     |
+| Create a `Vec` containing the summaries of all accounts | Method                | summarize | -                   | Vec<String> |
+
+### Account Methods
+
+| Description                                            | Method or Assoc. Func? | Name      | Args                      | Returns  |
+|--------------------------------------------------------|-----------------------|-----------|--------------------------|----------|
+| Create an 'Account' instance                            | Assoc. Func           | new()     | id: u32, holder: String   | Account  |
+| Add the given amount of money to the account's 'balance'| Method                | deposit  | amount: f64              |          |
+| Remove the given amount of money from the account's 'balance'. | Method           | withdraw | amount: f64              |          |
+| Create an account summary as a string and return it     | Method                | summary  | -                        | String   |
+
+<!-- prettier-ignore-end -->
 
 ### bank overview
 
