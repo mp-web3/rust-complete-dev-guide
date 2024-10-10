@@ -5,6 +5,24 @@ enum Media {
     Audiobook { title: String }
 }
 
+impl Media {
+    fn description(&self) -> String {
+        // Until we figure out what type `self` is, Rust won't allow us to access any properties on `self`
+        // even if they are common to all three different types (e.g. `title`)
+        
+        if let Media::Book { title, author} = self {
+            format!("Book title: {}, Book author: {}.", title, author)
+        } else if let Media::Movie { title, director} = self {
+            format!("Movie title: {}, Movie director: {}.", title, director)
+        } else if let Media::Audiobook {title} = self {
+            format!("Audiobook title: {}.", title)            
+        } else {
+            String::from("Media description")
+        }
+
+    }
+}
+
 fn print_media(media: Media) {
     println!("{:#?}", media);
 }
@@ -24,9 +42,9 @@ fn main() {
         author: String::from("Edward Snowden")
     };
 
-    print_media(audiobook);
-    print_media(movie);
-    print_media(book);
+    println!( "{:#?}", book.description());
+    println!( "{:#?}", movie.description());
+    println!( "{:#?}", audiobook.description());
 
 }
 
