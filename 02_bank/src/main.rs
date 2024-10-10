@@ -14,6 +14,10 @@ impl Account {
         }
     }
 
+    fn summary(&self) -> String {
+        format!("{} has a balance {}", self.holder, self.balance)
+    }
+
     fn deposit(&mut self, amount: i32) -> i32 {
         self.balance += amount;
         self.balance
@@ -48,25 +52,18 @@ impl Bank {
         self.accounts.push(account);
     }
 
-    fn total_balance(&mut self) -> i32 {
-        let mut bank_balance: i32 = 0;
-        for account in &self.accounts {
-            bank_balance += account.balance;
-        }
-        println!("Bank Total Balance is: {:#?}", bank_balance);
-        bank_balance
+    fn total_balance(&self) -> i32 {
+        self.accounts.iter().map(|account| account.balance).sum()
+    }
+
+    fn summary(&self) -> Vec<String> {
+        self.accounts
+            .iter()
+            .map(|account| account.summary())
+            .collect::<Vec<String>>()
     }
 }
 
-fn print_account(account: &Account) {
-    println!("{:#?}", account);
-}
-
-// fn make_and_print_account() {
-//     let account = Account::new(1, String::from("me"));
-//     println!("{:#?}", account);
-
-// }
 fn main() {
     let mut bank = Bank::new();
 
@@ -74,7 +71,9 @@ fn main() {
 
     account.deposit(500);
     account.withdraw(250);
+
     bank.add_account(account);
-    println!("{:#?}", bank);
+    println!("{:#?}", bank.summary());
+    println!("{:#?}", bank.total_balance());
 
 }
