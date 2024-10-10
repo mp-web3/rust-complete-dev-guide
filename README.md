@@ -1,5 +1,9 @@
 # rust-complete-dev-guide
 
+## Important Links
+
+- Full [video explanation](https://www.udemy.com/course/rust-the-complete-developers-guide/learn/lecture/44784613) with examples of Ownership and Moves
+
 ## Projects
 
 1. deck
@@ -67,4 +71,184 @@ Here is your deck Deck {
 }
 ```
 
+## 10 Rules of Ownership, Borrowing and Lifetimes
+
+1. Every value is owned by a single variable, struct, vector, argument, etc. at a time
+2. Reassigning the value to another variable, passing it to a function, putting it into a vector, etc. _moves_ the value. The old variable can't be used anymore!
+3. You can create many read-only references to a value that exist at the same time
+4. You can't move a value while a ref to the value exists
+5. You can make a writeable (mutable) reference to a value only if there are no read-only references currently in use. One mutable ref to a value can exist at a time
+6. You can't mutate a value through the owner when any ref (mutable or immutable) to the value exists
+7. Some types of values are copied instead of moved (numbers, bools, chars, arrays/tuples with copyable elements)
+8. When a variable goes out of scope, the value owned by it is dropped (cleaned up in memory)
+9. Values can't be dropped if there are still active references to it
+10. References to a value can't outlive the value they refer to
+
+## Ownership
+
+## Borrowing
+
+> References allow us to look at a value without moving it
+
+There are different type of references we can create:
+
+- read-only/immutable ref
+- writeable/mutable refs
+
+### Read-only/Immutable references
+
+3. You can create many read-only references to a value that exist at the same time
+4. You can't move a value while a ref to the value exists
+
+```
+#[derive(Debug)]
+struct Account {
+    id: u32,
+    balance: i32,
+    holder: String
+}
+
+impl Account {
+    fn new(id: u32, holder: String) -> Self {
+        Account {
+            id,
+            holder,
+            balance: 0
+        }
+    }
+}
+
+fn main() {
+  let account = Account::new(1, String::from("Mattia"));
+
+  let account_ref = &account;
+
+  // If I try to change the value account or account fields it will fail
+  // The following will vot compile!!!
+
+  account_ref.id = 2; // This does not compile
+}
+
+```
+
+### Writeable/Mutable references
+
+5. You can make a writeable (mutable) reference to a value only if there are no read-only references currently in use. One mutable ref to a value can exist at a time
+6. You can't mutate a value through the owner when any ref (mutable or immutable) to the value exists
+
+> Mutable refs allow us to read or change a value without moving it
+
+The following will compile correctly because we are using a mutable variable for account and reassigning the modified value to account, BUT is very manual and tedious.
+
+```
+// modify the account balance and returns account
+fn change_account(mut account: Account) -> Account {
+  account.balance = 10;
+  account
+}
+
+fn main() {
+  // 1. Instantiate a mutable account struct
+  let mut account = Account::new(
+    1,
+    String::from("me")
+  );
+
+  // 2. Pass the instance of account to the change_account() function
+  // and assign the returned value to account variable
+  account = change_account(account);
+  println!("{:#?}, account");
+
+}
+```
+
+Since _mutable refs_ allow us to read or change a value withouut moving it, a better way to modify the value of account.balance is the following
+
+```
+// Takes in as an argument a mutable reference of type Account
+fn change_account(account: &mut Account) {
+    account.balance = 10;
+}
+
+fn main() {
+
+  let mut account = Account::new(1, String::from("me"));
+
+  change_account(&mut account);
+
+  println!("{:#?}", account);
+}
+```
+
+### Copiable values
+
+7. Some types of values are copied instead of moved (numbers, bools, chars, arrays/tuples with copyable elements)
+
+Copyable values:
+
+- numbers (All)
+- bools
+- chars
+- arrays
+- tuples
+
+```
+fn main() {
+  let num = 5:
+  let other_num = num;
+
+  println!("{} {}", num, other_num)
+}
+```
+
+## Lifetimes
+
+The word "Lifetimes" by itself, refers to how long an owner or reference to a value exists
+"Generic Lifetimes"/"Lifetimes Annotations" is Extra syntax added in to clarify reletionships between different lifetimes
+
+8. When a variable goes out of scope, the value owned by it is dropped (cleaned up in memory)
+9. Values can't be dropped if there are still active references to it
+10. References to a value can't outlive the value they refer to
+
 ## bank
+
+## Implementation
+
+> With every function we write, we need to think about whether we are receiving values or refs
+> With every data structure we define, we need to think about whether we are storing values or refs
+
+### Bank Methods
+
+<!-- prettier-ignore-start -->
+
+| Description                                            | Method or Assoc. Func? | Name     | Args                  | Returns |
+|--------------------------------------------------------|-----------------------|----------|----------------------|---------|
+| Create a 'Bank' instance                                | Assoc. Func           | new()    | -                    | Bank    |
+| Add an account to the list of accounts                  | Method                | add_account() | account: Account    |         |
+| Calculate the total balance of all accounts             | Method                | total_balance() | -                  | i32     |
+| Create a `Vec` containing the summaries of all accounts | Method                | summary() | -                   | Vec<String> |
+
+### Account Methods
+
+| Description                                            | Method or Assoc. Func? | Name      | Args                      | Returns  |
+|--------------------------------------------------------|-----------------------|-----------|--------------------------|----------|
+| Create an 'Account' instance                            | Assoc. Func           | new()     | id: u32, holder: String   | Account  |
+| Add the given amount of money to the account's 'balance'| Method                | deposit()  | amount: i32              |      i32    |
+| Remove the given amount of money from the account's 'balance'. | Method           | withdraw() | amount: i32              |     i32     |
+| Create an account summary as a string and return it     | Method                | summary()  | -                        | String   |
+
+<!-- prettier-ignore-end -->
+
+### bank overview
+
+We want to create a project that simulates a bank
+
+Each account will have 3 fields:
+
+- id (unsigned integer)
+- balance (integer)
+- holder (String)
+
+We will have a struct type representing a bank and another struct type representing an account.
+
+The bank will have tied n number of accounts.
