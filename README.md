@@ -22,53 +22,9 @@
   - Use when you want to read or change fields on a specific instance
 - Implicit return: rust is going to return the last executed expression inside the function, as long as it doesn't end eith a semicolomn (;)
 
-## Create a project in a directory name different from package valid name
+## Useful
 
-To create a Rust project in a directory named `01_deck` while giving the package a valid name, you can use the `--name` flag with `cargo new`. This flag allows you to set the package name separately from the directory name. Here’s how you can do it:
-
-```bash
-cargo new "01_deck" --name deck
-```
-
-### Explanation:
-
-- `cargo new "01_deck"` creates a new Rust project in the directory named `01_deck`.
-- `--name deck` sets the package name to `deck` instead of `01_deck`, which resolves the issue of having an invalid character in the package name.
-
-### Alternative Approach:
-
-If you want the binary to have the name `01_deck`, you can modify the `Cargo.toml` file after creating the project:
-
-1. Create the project using:
-
-   ```bash
-   cargo new "01_deck" --name deck
-   ```
-
-2. Open the `Cargo.toml` file in the `01_deck` directory and add the following section to specify a custom binary name:
-
-   ```toml
-   [[bin]]
-   name = "01_deck"
-   path = "src/main.rs"
-   ```
-
-This way, the package name is still `deck`, but the binary will be named `01_deck` when compiled.
-
-### Summary
-
-The `--name` flag allows you to separate the directory name from the package name. Using this command:
-
-```bash
-cargo new "01_deck" --name deck
-```
-
-- Directory name: `01_deck`
-- Package name: `deck`
-
-And if you want a custom binary name, you can modify the `Cargo.toml` file to set `[[bin]] name = "01_deck"`.
-
-## Installing external Crates
+### Installing external Crates
 
 ```
 cargo add <crate-name>
