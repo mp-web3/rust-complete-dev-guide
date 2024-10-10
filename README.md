@@ -6,8 +6,9 @@
 
 ## Projects
 
-1. deck
+1. [deck](#deck)
 2. [bank](#bank)
+3. [media](#media)
 
 ## Definitions
 
@@ -70,6 +71,17 @@ Here is your deck Deck {
     ],
 }
 ```
+
+### Create a New cargo project with directory name different from package name
+
+Create a New Project with a Directory Named 03_media and a Package Named media Use the following command to specify the directory name and a valid package name:
+
+```
+cargo new <directory-name> --name <project-name>
+```
+
+- directory-name: The directory name (can start with a digit).
+- --name project-name: Sets the package name to project-name (a valid name for the package).
 
 ## 10 Rules of Ownership, Borrowing and Lifetimes
 
@@ -210,7 +222,25 @@ The word "Lifetimes" by itself, refers to how long an owner or reference to a va
 9. Values can't be dropped if there are still active references to it
 10. References to a value can't outlive the value they refer to
 
+---
+
+## deck
+
+TODO
+
 ## bank
+
+We want to create a project that simulates a bank
+
+Each account will have 3 fields:
+
+- id (unsigned integer)
+- balance (integer)
+- holder (String)
+
+We will have a struct type representing a bank and another struct type representing an account.
+
+The bank will have tied n number of accounts.
 
 ## Implementation
 
@@ -239,16 +269,28 @@ The word "Lifetimes" by itself, refers to how long an owner or reference to a va
 
 <!-- prettier-ignore-end -->
 
-### bank overview
+## media
 
-We want to create a project that simulates a bank
+This application is going to modeal a **media storage app**
 
-Each account will have 3 fields:
+<!-- prettier-ignore-start -->
 
-- id (unsigned integer)
-- balance (integer)
-- holder (String)
+| Book    |         |
+|---------|---------|
+| title   | String  |
+| author  | String  |
 
-We will have a struct type representing a bank and another struct type representing an account.
+| Movie   |         |
+|---------|---------|
+| title   | String  |
+| director| String  |
 
-The bank will have tied n number of accounts.
+| Audiobook|      |
+|---------|---------|
+| title   | String  |
+
+<!-- prettier-ignore-end -->
+
+We are going to create a `catolog`.
+We should than be able to store books, movies and audiobooks inside the catalog.
+We also want to have a search operation based on "author", "media type", etc...
