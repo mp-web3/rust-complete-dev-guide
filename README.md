@@ -27,6 +27,22 @@
   - Use when you want to read or change fields on a specific instance
 - Implicit return: rust is going to return the last executed expression inside the function, as long as it doesn't end eith a semicolomn (;)
 
+### enums
+
+We can _imagine_ that the following create three structs
+
+```
+enum Media {
+    Book { title: String, author: String },
+    Movie { title: String, director: String },
+    Audiobook { title: String }
+}
+```
+
+> Book, Movie and Audiobook are all of type `Media`
+
+Now we can define functions that accept values of type `Media`, and put it in a `Book` or a `Movie` or an `Audiobook`.
+
 ## Useful
 
 ### Installing external Crates
@@ -294,3 +310,18 @@ This application is going to modeal a **media storage app**
 We are going to create a `catolog`.
 We should than be able to store books, movies and audiobooks inside the catalog.
 We also want to have a search operation based on "author", "media type", etc...
+
+### Implementation
+
+We have 2 options to model `Book`, `Movie` and `Audiobook`:
+
+- Structs
+- Enums
+
+```
+enum Media {
+    Book { title: String, author: String },
+    Movie { title: String, director: String },
+    Audiobook { title: String }
+}
+```
