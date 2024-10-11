@@ -100,7 +100,17 @@ fn main() {
     catalog.add(podcast);
     catalog.add(placeholder);
 
-    println!("{:#?}", catalog);
+    // println!("{:#?}", catalog);
+    // To access a single media in the catalog
+    // println!("{:#?}", catalog.items.get(100));
+
+    match catalog.items.get(10) {
+        // Option:: is implicit
+        Some(value) => {
+            println!("Item: {:#?}", value);
+        }
+        None => println!("Nothing at that index!")
+    }
 
 }
 

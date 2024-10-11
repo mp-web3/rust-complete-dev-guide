@@ -27,6 +27,19 @@
   - Use when you want to read or change fields on a specific instance
 - Implicit return: rust is going to return the last executed expression inside the function, as long as it doesn't end eith a semicolomn (;)
 
+> ⚠️ Rust doesn't have "null", "nill", or "undefined"
+> Rust forces devs to handle cases in which no value is returned
+
+- Uses instead a _built-in_ enum called "Option"
+- Option has 2 variants, "Some" and "None"
+  ```
+  enum Option {
+    Some(value),
+    None
+  }
+  ```
+- If you want to work with "Option" you have to use "pattern matching" (if-else or match)
+
 ### enums
 
 We can _imagine_ that the following create three structs
@@ -335,3 +348,5 @@ Ask the following question to decide:
 
 - _Does each thing have some same, but some different methods?_
   -> It is probably better to use "structs"
+
+#### Adding our Media to the Catalog
