@@ -1,8 +1,16 @@
 #[derive(Debug)]
 enum Media {
+    // Book, Movie, and Audiobook are referred to as variants
     Book { title: String, author: String },
     Movie { title: String, director: String },
-    Audiobook { title: String }
+    Audiobook { title: String }, 
+    // Podcast {episode_number: u32},
+    // You don't always need to have named fields for the variants, in fact you could
+    // specify a variant with one raw value of type u32 like so:
+    Podcast(u32),
+    // And if you don't know yet what fields need to go in the variant you can omit
+    // the curly braces like so:
+    Placeholder
 }
 
 impl Media {
@@ -21,7 +29,7 @@ impl Media {
         // }
 
         // We will use instead a pattern match statement
-
+        // Remember that match statements need to handle every possible case
         match self {
             // If self is of Media Type Book, give me access to title and author...
             Media::Book { title, author} => {
@@ -33,9 +41,14 @@ impl Media {
             },
             Media::Audiobook { title } => {
                 format!("Audiobook title: {}.", title)
+            },
+            Media::Podcast(id) => {
+                format!("Podcast: {}", id)
+            },
+            Media::Placeholder => {
+                format!("Placeholder")
             }
         }
-
     }
 }
 
@@ -73,6 +86,9 @@ fn main() {
         author: String::from("Edward Snowden")
     };
 
+    let podcast = Media::Podcast(1);
+    let placeholder = Media::Placeholder;
+
     // println!( "{:#?}", book.description());
     // println!( "{:#?}", movie.description());
     // println!( "{:#?}", audiobook.description());
@@ -81,6 +97,8 @@ fn main() {
     catalog.add(audiobook);
     catalog.add(movie);
     catalog.add(book);
+    catalog.add(podcast);
+    catalog.add(placeholder);
 
     println!("{:#?}", catalog);
 
