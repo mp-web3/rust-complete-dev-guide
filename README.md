@@ -325,3 +325,13 @@ enum Media {
     Audiobook { title: String }
 }
 ```
+
+> When should we use enums vs structs?
+
+Ask the following question to decide:
+
+- _Does each thing I am modeling have the same methods?_
+  -> It is probably better to use "enums"
+
+- _Does each thing have some same, but some different methods?_
+  -> It is probably better to use "structs"
