@@ -10,14 +10,30 @@ impl Media {
         // Until we figure out what type `self` is, Rust won't allow us to access any properties on `self`
         // even if they are common to all three different types (e.g. `title`)
         
-        if let Media::Book { title, author} = self {
-            format!("Book title: {}, Book author: {}.", title, author)
-        } else if let Media::Movie { title, director} = self {
-            format!("Movie title: {}, Movie director: {}.", title, director)
-        } else if let Media::Audiobook {title} = self {
-            format!("Audiobook title: {}.", title)            
-        } else {
-            String::from("Media description")
+        // if let Media::Book { title, author} = self {
+        //     format!("Book title: {}, Book author: {}.", title, author)
+        // } else if let Media::Movie { title, director} = self {
+        //     format!("Movie title: {}, Movie director: {}.", title, director)
+        // } else if let Media::Audiobook {title} = self {
+        //     format!("Audiobook title: {}.", title)            
+        // } else {
+        //     String::from("Media description")
+        // }
+
+        // We will use instead a pattern match statement
+
+        match self {
+            // If self is of Media Type Book, give me access to title and author...
+            Media::Book { title, author} => {
+                // Inside here is like being in a If else statement
+                format!("Book title: {}, Book author: {}.", title, author)
+            },
+            Media::Movie { title, director } => {
+                format!("Movie title: {}, Movie director: {}.", title, director)
+            },
+            Media::Audiobook { title } => {
+                format!("Audiobook title: {}.", title)
+            }
         }
 
     }
