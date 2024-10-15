@@ -66,9 +66,19 @@ impl Catalog {
         self.items.push(media);
     }
 
-    fn get_by_index(&self, index:usize) -> &Media {
-        &self.items[index]
+    fn get_by_index(&self, index:usize) -> MightHaveValue {
+        if self.items.len() > index {
+            MightHaveValue::ThereIsValue(&self.items[index])
+        } else {
+            // In Rust we have to return something!
+            MightHaveValue::NoValue
+        }
     }
+}
+
+enum MightHaveValue<'a> {
+    ThereIsValue(&'a Media),
+    NoValue,
 }
 
 fn print_media(media: Media) {
@@ -100,9 +110,27 @@ fn main() {
     catalog.add(podcast);
     catalog.add(placeholder);
 
-    let item = catalog.get_by_index(40);
+    // let item = catalog.get_by_index(40);
 
-    println!("{:#?}", item);
+    // println!("{:#?}", item);
+
+    match catalog.get_by_index(0) {
+        MightHaveValue::ThereIsValue(value) => {
+            println!("Item: {:#?}", value)
+        }
+        MightHaveValue::NoValue => {
+            println!("No value here!")
+        }
+    }
+
+    // This does the same thing as "match"
+    
+    if let MightHaveValue::ThereIsValue(value) = catalog.get_by_index(0) {
+        println!("Item: {:#?}", value)
+        
+    } else {
+        println!("No value here!")
+    }
 
 }
 
