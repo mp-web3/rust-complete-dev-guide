@@ -349,4 +349,24 @@ Ask the following question to decide:
 - _Does each thing have some same, but some different methods?_
   -> It is probably better to use "structs"
 
-#### Adding our Media to the Catalog
+### Custom Implementation of "option"
+
+The following enum is a specific implementation of "option", just to show
+how it works
+
+```
+fn get_by_index(&self, index:usize) -> MightHaveValue {
+    if self.items.len() > index {
+        MightHaveValue::ThereIsValue(&self.items[index])
+    } else {
+        // In Rust we have to return something!
+        MightHaveValue::NoValue
+    }
+}
+
+
+enum MightHaveValue<'a> {
+    ThereIsValue(&'a Media),
+    NoValue,
+}
+```

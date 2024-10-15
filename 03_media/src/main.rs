@@ -65,6 +65,14 @@ impl Catalog {
     fn add(&mut self, media: Media) {
         self.items.push(media);
     }
+
+    fn get_element_by_index(&self, index: usize) -> Option<&Media> {
+        if self.items.len() > index {
+            Some(&self.items[index])
+        } else {
+            None
+        }
+    }
 }
 
 fn print_media(media: Media) {
@@ -110,6 +118,12 @@ fn main() {
             println!("Item: {:#?}", value);
         }
         None => println!("Nothing at that index!")
+    }
+    
+    if let Some(value) = catalog.get_element_by_index(0) {
+        println!("Item: {:#?}", value);
+    } else {
+        println!("Nothing at that index!")
     }
 
 }
