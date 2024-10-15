@@ -7,17 +7,25 @@
 // 4) In the None case, print the message "No account found"
 // Hint: You might have to add in the "mut" keyword somewhere...
 
-#[derive(debug)]
+#[derive(Debug)]
 struct Account { 
     balance: i32
 }
 
 fn main() {
-    let accounts: Vec<Account> = vec![
+    let mut accounts: Vec<Account> = vec![
         Account { balance: 0},
         Account { balance: 10}
     ];
 
-    // Add code here
+    match accounts.first_mut() {
+        Some(a) => {
+            a.balance = 30;
+            println!("First account {:#?}", a)
+        }
+        None => {
+            println!("No account found")
+        }
+    }
 
 }
