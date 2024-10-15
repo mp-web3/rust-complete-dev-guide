@@ -56,6 +56,35 @@ enum Media {
 
 Now we can define functions that accept values of type `Media`, and put it in a `Book` or a `Movie` or an `Audiobook`.
 
+### option
+
+#### **Other Ways of handling options**
+
+`item.unwrap()`
+
+- If "item" is a Some, returns the value in Some
+- If "item" is a None, panics!
+
+> Use for quick debugging or examples
+
+---
+
+`item.expect("There should be a value here")`
+
+- If "item" is a Some, returns the value in Some
+- If "item" is a None, prints the provided debug message and panics!
+
+> Use when we want the program **to crash** if there is no value
+
+---
+
+`item.unwrap_or(&placeholder)`
+
+- If "item" is a Some, returns the value in Some
+- If "item" is a None, returns the provided default value
+
+> Use when it makes sense to provide a fallback value
+
 ## Useful
 
 ### Installing external Crates
@@ -370,3 +399,5 @@ enum MightHaveValue<'a> {
     NoValue,
 }
 ```
+
+#
