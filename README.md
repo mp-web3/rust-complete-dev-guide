@@ -400,4 +400,106 @@ enum MightHaveValue<'a> {
 }
 ```
 
-#
+## Media project refactoring with Multiple Modules
+
+We are going to keep in the `root module` only the `fn main()`
+
+We'll create a submodule `content module` that contain our:
+
+- `enum Media{}`
+- `struct Catalog{}`
+
+### Different ways of creating modules
+
+- **Option 1**: create a module in an existing file
+- **Option 2**: create a module in an new single file in the same folder of main module
+
+#### **Option 1**: create a module in an existing file
+
+> Most appropriate when you have a really large file with a lot of stuff, but you want to keep everything in the same file
+
+_example_
+
+```
+mod content {
+  pub enum Media { /* fields */ }
+  /* Media impl */
+  pub struct Catalog { /* fields */ }
+  /* Catalog impl */
+}
+
+fn main() {
+  let catalog = content::Catalog::new()
+}
+```
+
+By default everything inside a module is "private"
+To make it accessible outside the module you have to make it "public", `pub`
+
+#### **Option 2**: create a module in an new single file in the same folder
+
+> Most appropriate when you want a separate module to organize code, but it doesn't need to span several files
+
+_example_
+
+`src/content.rs`
+
+```
+pub enum Media { /* fields */ }
+/* Media impl */
+pub struct Catalog { /* fields */ }
+/* Catalog impl */
+```
+
+`main.rs`
+
+```
+mod content; // name of the file that contains our module
+
+use content::Catalog;
+
+fn main() {
+  let catalog = Catalog::new()
+}
+```
+
+#### **Option 3**: spread code out among separate files in a new folder
+
+> Most appropriate when you have a large module
+
+_example_
+
+`content/media.rs`
+
+```
+pub enum Media { /* fields */ }
+/* Media impl */
+```
+
+`content/catalog.rs`
+
+```
+pub struct Catalog { /* fields */ }
+/* Catalog impl */
+```
+
+`content/mod.rs`
+
+> in this case is required to create a mod.rs file
+
+```
+pub mod media;
+pub mod catalog;
+```
+
+`main.rs`
+
+```
+mod content;
+
+use content::Catalog;
+
+fn main() {
+  let catalog = Catalog::new()
+}
+```
