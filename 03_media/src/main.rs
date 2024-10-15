@@ -65,6 +65,10 @@ impl Catalog {
     fn add(&mut self, media: Media) {
         self.items.push(media);
     }
+
+    fn get_by_index(&self, index:usize) -> &Media {
+        &self.items[index]
+    }
 }
 
 fn print_media(media: Media) {
@@ -89,10 +93,6 @@ fn main() {
     let podcast = Media::Podcast(1);
     let placeholder = Media::Placeholder;
 
-    // println!( "{:#?}", book.description());
-    // println!( "{:#?}", movie.description());
-    // println!( "{:#?}", audiobook.description());
-
     let mut catalog = Catalog::new();
     catalog.add(audiobook);
     catalog.add(movie);
@@ -100,17 +100,9 @@ fn main() {
     catalog.add(podcast);
     catalog.add(placeholder);
 
-    // println!("{:#?}", catalog);
-    // To access a single media in the catalog
-    // println!("{:#?}", catalog.items.get(100));
+    let item = catalog.get_by_index(40);
 
-    match catalog.items.get(10) {
-        // Option:: is implicit
-        Some(value) => {
-            println!("Item: {:#?}", value);
-        }
-        None => println!("Nothing at that index!")
-    }
+    println!("{:#?}", item);
 
 }
 
