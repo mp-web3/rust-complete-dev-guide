@@ -351,6 +351,9 @@ Ask the following question to decide:
 
 ### Custom Implementation of "option"
 
+The following enum is a specific implementation of "option", just to show
+how it works
+
 ```
 fn get_by_index(&self, index:usize) -> MightHaveValue {
     if self.items.len() > index {
