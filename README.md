@@ -506,3 +506,13 @@ fn main() {
   let catalog = Catalog::new()
 }
 ```
+
+## 04 logs progect
+
+We are going to create a logs.txt full of mocked logs from, for example, our web server.
+
+Then we will:
+
+1. Open and parse the logs.txt file
+2. Extracts some useful data from the file
+3. Make sure we have robust error handling
