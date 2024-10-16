@@ -14,6 +14,8 @@
 
 > ⚠️ In Rust "variables" are called "bindings"
 
+> ⚠️ Any time you create a folder inside "src", ypu also have to create a file named "mod.rs"
+
 - Vector: can grow and shrink in size and contains elements
 - Array: it is a collection of elements fixed in size
 - Trait: a set of functions
@@ -466,6 +468,7 @@ fn main() {
 #### **Option 3**: spread code out among separate files in a new folder
 
 > Most appropriate when you have a large module
+> Every file and folder makes its own separate module
 
 _example_
 
