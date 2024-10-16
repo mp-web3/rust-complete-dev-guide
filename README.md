@@ -58,7 +58,18 @@ enum Media {
 
 Now we can define functions that accept values of type `Media`, and put it in a `Book` or a `Movie` or an `Audiobook`.
 
-### option
+### option enum
+
+```
+enum Option {
+  Some(value),
+  None
+}
+```
+
+- Option is used when we need to know if a value is present or not
+- Some() variant is used when we have a value
+- None variant is used when there is no value
 
 #### **Other Ways of handling options**
 
@@ -86,6 +97,40 @@ Now we can define functions that accept values of type `Media`, and put it in a 
 - If "item" is a None, returns the provided default value
 
 > Use when it makes sense to provide a fallback value
+
+### Result enum
+
+```
+enum Result {
+  Ok(value),
+  Err(error)
+}
+```
+
+- Result is used when we need to know if something worked or failed
+- Ok() variant is used when something went well
+- Err() variant is used when something "bad" happened
+
+#### **Example**
+
+```
+use::std::io::Error;
+
+fn divide(a: f64, b: f64) -> Result<f64, Error> {
+    if b == 0.0 {
+        Err(Error::other("can't divide by 0"))
+    } else {
+        Ok(a/b)
+    }
+}
+```
+
+- We are returning something of type Result
+- "< >" indicates is a generic enum, the things we pass inside are like "arguments"
+
+![Result enum diagram](./images/result-enum-diagram-explanation.png)
+
+---
 
 ## Useful
 
