@@ -15,23 +15,29 @@ fn extract_errors(text: &str) -> Vec<&str> {
 
 fn main() {
 
-    match fs::read_to_string("logs.txt") {
-        Ok(text) => {
+    let text = fs::read_to_string("logs.txt").expect("Error reading file");
 
-            let error_logs = extract_errors(text.as_str());
+    let errors_logs = extract_errors(text.as_str());
 
-            match fs::write("errors.txt", error_logs.join("\n")) {
-                Ok(..) => {
-                    print!("Errors written to file")
-                }
-                Err(e) => {
-                    println!("Error writing file: {:?}", e)
-                }
-            }
-        }
-        Err(e) => {
-            println!("Error reading file: {:?}", e)
-        }
-    }
+    fs::write("errors.txt", errors_logs.join("\n")).expect("failed to write errors.txt");
+    
+    // match fs::read_to_string("logs.txt") {
+    //     Ok(text) => {
+
+    //         let error_logs = extract_errors(text.as_str());
+
+    //         match fs::write("errors.txt", error_logs.join("\n")) {
+    //             Ok(..) => {
+    //                 print!("Errors written to file")
+    //             }
+    //             Err(e) => {
+    //                 println!("Error writing file: {:?}", e)
+    //             }
+    //         }
+    //     }
+    //     Err(e) => {
+    //         println!("Error reading file: {:?}", e)
+    //     }
+    // }
 
 }
