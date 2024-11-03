@@ -4,6 +4,8 @@
 
 - Full [video explanation](https://www.udemy.com/course/rust-the-complete-developers-guide/learn/lecture/44784613) with examples of Ownership and Moves
 
+- Rewatch in depth [lecture on &str (string slice)](https://www.udemy.com/course/rust-the-complete-developers-guide/learn/lecture/44784805#overview) Immportant for debuugging
+
 ## Projects
 
 1. [deck](#deck)
