@@ -399,6 +399,50 @@ let color = String::from("red");
 let color_ref = &color;
 ```
 
+1. "red" is stored in _Data_
+2. "red" is copied into _Heap_
+3. The String Struct is stored in the _Stack_
+   - pointer to text --> _Heap_
+   - lenght of String "red"
+   - capacity of String "red"
+4. A Ref to "red" is stored in _Stack_ --> String "red" also in _Stack_
+
+![How a Ref to a String is stored](./images/&String-storing.png)
+
+### &str (String slice) - method 1
+
+```rust
+let name: &str = "me"
+```
+
+1. "me" is stored in _Data_
+2. &str struct is stored in \_Stack. It has only 2 fiels:
+   - pointer to text
+   - length of string
+3. Pointer, points directly to _Data_
+
+![Storing a String slice (&str)](./images/str_string-slice_storing.png)
+
+### &str (String slice) - method 2
+
+```rust
+let color = String::from("red");
+let c = color.as_str();
+```
+
+1. "red" is stored in _Data_
+2. "red" is copied into _Heap_
+3. The String Struct is stored in the _Stack_
+   - pointer to text --> _Heap_
+   - lenght of String "red"
+   - capacity of String "red"
+4. &str struct is stored in \_Stack. It has only 2 fiels:
+   - pointer to text
+   - length of string
+5. Pointer, points to _Heap_
+
+![Storing a String slice (&str)](./images/as_str_string-slice_storing.png)
+
 ## deck
 
 ## bank
