@@ -458,6 +458,33 @@ let portion = &color[1..4];
 
 ![&str for slicing a text](./images/when-to-uuse-&str.png)
 
+### Split method in Rust
+
+```
+fn extract_errors(text: &str) -> Vec<&str> {
+ let split_text = text.split("\n");
+ let mut results = vec![];
+
+ for line in split_text {
+     if line.starts_with("ERROR") {
+         results.push(line);
+     }
+ }
+
+    results
+}
+```
+
+- `Split` returns a `Vec<&str>`
+  - `let split_text: Vec<&str> = text.split("\n")`;
+
+> In the following image we ignore stack/heap for simplicity
+> ![How split method works](./images/split-method.png)
+
+- text: String
+- word_list: Vec<&str>
+- Each `&str`in the `word_list` points at the first character of each word
+
 ## deck
 
 ## bank

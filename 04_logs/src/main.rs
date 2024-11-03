@@ -1,15 +1,12 @@
-use core::error;
 use std::fs;
-mod weird_strings;
 
-fn extract_errors(text: &str) -> Vec<&str> {
- // Split the text into separate lines
+fn extract_errors(text: &str) -> Vec<String> {
  let split_text = text.split("\n");
  let mut results = vec![];
 
  for line in split_text {
      if line.starts_with("ERROR") {
-         results.push(line);
+         results.push(line.to_string());
      }
  }
 
