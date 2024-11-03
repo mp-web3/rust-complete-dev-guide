@@ -1,3 +1,4 @@
+use core::error;
 use std::fs;
 mod weird_strings;
 
@@ -16,18 +17,14 @@ fn extract_errors(text: &str) -> Vec<&str> {
 }
 
 fn main() {
-    // let text = fs::read_to_string("logs.txt");
-    // println!("{:?}", text);
+    let mut error_logs = vec![];
 
-    // Let's refactor this to use a match statement
     match fs::read_to_string("logs.txt") {
         Ok(text) => {
-            let error_logs = extract_errors(text.as_str());
-            println!("{:#?}", error_logs);
+            error_logs = extract_errors(text.as_str());
         }
         Err(e) => println!("Error: {}", e),
     }
-
-    // weird_strings::main();
+    println!("{:#?}", error_logs);
 
 }
