@@ -327,11 +327,79 @@ The word "Lifetimes" by itself, refers to how long an owner or reference to a va
 9. Values can't be dropped if there are still active references to it
 10. References to a value can't outlive the value they refer to
 
----
+## Computer memory in Rust
+
+- Stack
+- Heap
+- Data Segment/Rodata Segment/Static Segment
+
+![Computer memory areas](./images/computer-memory.png)
+
+**Stack**<br>
+Stack is fast but of limites size (2-8MB)
+
+**Heap**<br>
+Slow but can grow to store a lot of data (Gib)
+
+**Data**<br>
+Stores literal value that we write into our code and kinda embedd them in the source code.
+
+### Commmon usage pattern of Stack, Heap, and Data
+
+- Stack stores metadata about a datastructre
+- Heap stores the actual data
+
+> This pattern avoids the stack from running out of memory <br>
+> if the data structure grows too much
+
+![Common pattern for storing and accessing data](./images/stack-heap-data_common-pattern.png)
+
+`let nums = vec![1,2,3,4,5];`
+Behind the scenes the values are initial stored inn the Data segment
+and than copied in the Heap
+Finally the Vec Struct pointers, point to the values in the heap.
+
+### Corner case
+
+If a data structure owns another data structure, the child's metadata will be placed on the heap.
+
+```rust
+let vec_of_num = vec![
+  vec![1,2,3,4,5]
+];
+```
+
+![Corner case for storing and accessing data](./images/stack-heap-data_corner-case.png)
+
+## Strings from Stack, Heap, Data perpective
+
+- `String`
+- `&String`
+- `&str`
+
+### String
+
+```rust
+let color = String::from("red");
+```
+
+1. "red" is stored in _Data_
+2. "red" is copied into _Heap_
+3. The String Struct is stored in the _Stack_
+   - pointer to text --> _Heap_
+   - lenght of String "red"
+   - capacity of String "red"
+
+![How a String is stored](./images/String-storing.png)
+
+### &String
+
+```rust
+let color = String::from("red");
+let color_ref = &color;
+```
 
 ## deck
-
-TODO
 
 ## bank
 
