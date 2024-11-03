@@ -443,6 +443,21 @@ let c = color.as_str();
 
 ![Storing a String slice (&str)](./images/as_str_string-slice_storing.png)
 
+### Why is there &String, and &str?
+
+> `&String` and `&str` are both a read-only reference to text-data.
+
+Reason 1: sometimes we might prefer to point directly at _Data_ for memory optimization. (See [method1](#str-string-slice---method-1))
+
+Reason 2: &str lets you take a portion of a text (_slice_) that is already on the _Heap_
+
+```rust
+let color = String::from("blue");
+let portion = &color[1..4];
+```
+
+![&str for slicing a text](./images/when-to-uuse-&str.png)
+
 ## deck
 
 ## bank
