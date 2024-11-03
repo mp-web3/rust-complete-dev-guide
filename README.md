@@ -487,6 +487,22 @@ fn extract_errors(text: &str) -> Vec<&str> {
 - word_list: Vec<&str>
 - Each `&str`in the `word_list` points at the first character of each word
 
+## `?` operator (also called 'Try' operator)
+
+> '?' operator gets added onto functions that return a 'Result'
+
+```rust
+fn main() -> Result<(), Error> {
+  let text = fs::read_to_string("logs.txt")?;
+}
+```
+
+- If the `fn main()` returns `Ok(..)`: <br>
+  -> '?' is going to automatically unwrap the text and assign it to the variable
+
+- If the `fn main()` returns `Err`: <br>
+  -> As soon as the Error happens the operator '?' is going to unwrap and return the error. NOT assigning it to the variable.
+
 ## deck
 
 ## bank
