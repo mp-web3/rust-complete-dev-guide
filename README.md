@@ -572,6 +572,34 @@ fn main() -> Result<(), Error> {
 
 # Iterators
 
+- Iterators are struct, so they have their own set of fields
+- It's an object completly separate from the object that is iterating over
+
+What happens when you call `next()` method on a iterator:
+
+```rust
+fn main() {
+    let colors = vec![
+        String::from("red"),
+        String::from("green"),
+        String::from("blue"),
+    ];
+
+    let mut colors_iter = colors.iter();
+
+    println!("{:#?}", colors_iter.next());
+    println!("{:#?}", colors_iter.next());
+    println!("{:#?}", colors_iter.next());
+    println!("{:#?}", colors_iter.next());
+}
+```
+
+> ! We need to declare variable (`colors_iter`) that will point to a different String inside colors using the `mut` keyword, because the `Pointer to current position` inside the Iter struct, is chainging at each iteration.
+
+![using an iterator and next method](./images/iterator-method-next.png)
+
+![iteration next flow](./images/iteratoion-flow.png)
+
 ## bank
 
 We want to create a project that simulates a bank
