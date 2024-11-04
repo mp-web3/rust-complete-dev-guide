@@ -570,6 +570,8 @@ fn main() -> Result<(), Error> {
 }
 ```
 
+# Iterators
+
 ## bank
 
 We want to create a project that simulates a bank
