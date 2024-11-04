@@ -600,6 +600,20 @@ fn main() {
 
 ![iteration next flow](./images/iteratoion-flow.png)
 
+## 'for' loops
+
+1. Rust automatically create an iterator for the vector
+2. Call `next` on the iterator and unwrap the Option that comes back
+3. Breaks once `next` returns a None
+
+```rust
+fn print_elements(elements: &Vec<String>) {
+    for element in elements {
+        println!("{}", element);
+    }
+}
+```
+
 ## bank
 
 We want to create a project that simulates a bank
