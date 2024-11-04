@@ -503,7 +503,72 @@ fn main() -> Result<(), Error> {
 - If the `fn main()` returns `Err`: <br>
   -> As soon as the Error happens the operator '?' is going to unwrap and return the error. NOT assigning it to the variable.
 
-## deck
+## match || if v.s. unwrap() || expect() v.s. '?' (try operator)
+
+1. Use `match` or `if let` statement when you want to deal meaningfully with an error
+2. Use `unwrap()` or `expect` on the `Result` for quick debugging or if you want the app to crash on an `Err`
+3. Use `?` to unwrap or propagate the `Result`
+
+### Use `match` or `if let`
+
+- **Task:** Read some config data from a file
+- If fails to read the file, use some backup default config (NOT juust logging the error)
+
+> This falls into the deal meaningfully with an error
+
+**Code example**
+
+- In this example we are handling the error by using a default configuration in case the
+  `read_config_file` fails
+
+```rust
+fn read_config_file() -> Result<String, Error> {
+  fs::read_to_string("config.json")
+}
+
+fn get_config() -> String {
+  let default_config = String::from("{enable_debug: true}")
+}
+
+  match read_config_file() {
+    Ok(config) => config,
+    Err(_err) => {
+      println!("Config read error, using default_config")
+      default_config
+    }
+  }
+```
+
+### Use `?` try operator
+
+- **Task:** Read some config data from a file
+- If fails to read the file, exit
+
+> In this case we are not dealing meaningfully with the error, we just want to unwrap or propagate the `Result`
+> We are relying on the parent function to deal with the error
+
+**Code example**
+
+- In this example we are ha
+
+```rust
+fn read_config_file() -> Result<String, Error> {
+  fs::read_to_string("config.json")
+}
+
+fn get_config() -> String {
+  let config = read_config_file()?;
+
+  Ok(config)
+}
+
+fn main() -> Result<(), Error> {
+  let config = get_config()?;
+  println!("Got a config: {}", config);
+
+  Ok(())
+}
+```
 
 ## bank
 
